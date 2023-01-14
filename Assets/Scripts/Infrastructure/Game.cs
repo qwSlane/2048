@@ -1,15 +1,13 @@
-using Infrastructure;
-using UnityEngine;
+namespace Infrastructure {
 
-public class Game {
+    public class Game {
 
-    private GameField _field;
-    public GameStateMachine _StateMachine;
+        public readonly GameStateMachine StateMachine;
 
-    public Game(GameField field, ICoroutineRunner coroutineRunner) {
-        _StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner));
-        _field = field;
-        _field.Initialize();
+        public Game(ICoroutineRunner coroutineRunner) {
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner));
+        }
+
     }
 
 }

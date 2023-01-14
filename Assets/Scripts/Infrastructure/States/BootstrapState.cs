@@ -1,4 +1,4 @@
-﻿namespace Infrastructure {
+﻿namespace Infrastructure.States {
 
     public class BootstrapState : IState {
 
@@ -17,7 +17,7 @@
         }
 
         private void EnterLoadLevel() {
-            
+            _gameStateMachine.Enter<LoadLevelState, string>("Game");
         }
 
         public void Exit() {
