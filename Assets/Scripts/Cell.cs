@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour {
 
-   private Tile _currentTile;
+    private Tile _currentTile;
     private readonly Dictionary<Direction, Cell> _neighbours = new Dictionary<Direction, Cell>();
-    [SerializeField]private List<Tile> _mergedTiles = new List<Tile>();
+    [SerializeField] private List<Tile> _mergedTiles = new List<Tile>();
     private bool _isMerged;
     public int GetValue => (_currentTile) ? _currentTile.Value : 0;
 
@@ -18,6 +18,7 @@ public class Cell : MonoBehaviour {
         _neighbours[Direction.Up] = up;
         _neighbours[Direction.Down] = down;
     }
+
     public Tile Tile {
         get => _currentTile;
         set {
@@ -43,9 +44,7 @@ public class Cell : MonoBehaviour {
             _currentTile.Appear();
             _mergedTiles.Clear();
         }
-        
-        if(_currentTile)
-            _currentTile.Move();
+        _currentTile?.Move();
     }
 
     private bool TryAdd(Tile merged, Direction direction) {
@@ -58,7 +57,7 @@ public class Cell : MonoBehaviour {
     }
 
     private bool Merging(Tile merged) {
-        if (_currentTile && _currentTile.Value == merged.Value) {
+        if (_currentTile?.Value == merged.Value &&!_isMerged) {
             PrepareTiles(merged);
             _currentTile = GetNewTile?.Invoke(transform, _currentTile.Value * 2);
             _isMerged = true;
@@ -74,7 +73,7 @@ public class Cell : MonoBehaviour {
 
     private void PushNext(Tile merged, Direction direction) {
         if (_neighbours[direction] && _neighbours[direction].TryMerge(merged, direction))
-            _currentTile = null;
+            Clear();
     }
 
     private void PrepareTiles(Tile merged) {

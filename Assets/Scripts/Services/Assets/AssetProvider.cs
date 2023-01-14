@@ -10,8 +10,6 @@ namespace Services.Assets {
             return Object.Instantiate(prefab, position, Quaternion.identity, parent);
         }
 
-
-
     }
 
 }

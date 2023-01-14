@@ -15,12 +15,9 @@ public class GameFactory {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 Vector3 position = new Vector3(i * 4, (i + j) * .2f, j * 4);
-                
                 Cell cell = _assetProvider.GetAsset(AssetPath.CellPath, position, parent) 
                     .GetComponent<Cell>();
-
                 cell.GetNewTile += InstantiateTile;
-            
                 cells[i, j] = cell;
             }
         }
