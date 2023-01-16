@@ -4,9 +4,9 @@
 
         private const string Initial = "Initial";
 
-        private GameStateMachine _gameStateMachine;
+        private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
-        
+
         public BootstrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader) {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -21,7 +21,6 @@
         }
 
         public void Exit() {
-            
         }
 
     }

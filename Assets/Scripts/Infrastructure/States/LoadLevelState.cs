@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Infrastructure.States {
 
@@ -20,9 +19,9 @@ namespace Infrastructure.States {
         public void Enter(string payLoad) {
             _sceneLoader.Load(payLoad, OnLoaded);
         }
-
+        
         private void OnLoaded() {
-            GameObject.FindWithTag("Field").GetComponent<GameField>().Initialize();
+           
         }
 
         public void Exit() {

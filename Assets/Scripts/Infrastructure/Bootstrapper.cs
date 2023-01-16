@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Infrastructure.States;
+﻿using Infrastructure.States;
+using Services;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Infrastructure {
 

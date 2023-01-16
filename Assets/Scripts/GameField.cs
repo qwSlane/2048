@@ -1,5 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Entities;
+using Services;
 using UnityEngine;
+using Zenject;
 using Random = System.Random;
 
 public class GameField : MonoBehaviour {
@@ -11,25 +14,30 @@ public class GameField : MonoBehaviour {
 
     private bool _isMerged;
 
-    public void Initialize() {
-        _randomService = new Random();
-        _gameFactory = new GameFactory();
+    [Inject]
+    public void Initialize(
+        IInputService inputService, GameFactory gameFactory,
+        Random randomService
+    ) {
+        _randomService = randomService;
+        _gameFactory = gameFactory;
         _cells = _gameFactory.CreateCells(transform);
+        inputService.Swipe += Swipe;
         SpawnTile();
     }
 
-    public void Update() {
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            MoveLeft();
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            MoveRight();
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+    private void Swipe(Vector2 direction) {
+        if (direction is { x: > 0, y: > 0 }) {
             MoveUp();
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+        else if (direction is { x: > 0, y: < 0 }) {
+            MoveRight();
+        }
+        else if (direction is { x: < 0, y: < 0 }) {
             MoveDown();
+        }
+        else if (direction is { x: < 0, y: > 0 }) {
+            MoveLeft();
         }
     }
 
