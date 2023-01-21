@@ -6,22 +6,22 @@ namespace Infrastructure.States {
 
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
+     //   private readonly Curtain _curtain;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader) {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
         }
 
-        public void Enter() {
-          
-        }
-
-        public void Enter(string payLoad) {
-            _sceneLoader.Load(payLoad, OnLoaded);
+        public void Enter(string payload) {
+         //   _curtain.Show();
+           // _sceneLoader.SendProgress += _curtain.UpdateLoadingBar;
+            _sceneLoader.Load(payload, OnLoaded);
         }
         
         private void OnLoaded() {
-           
+        //    _curtain.Hide();
+         //   _sceneLoader.SendProgress -= _curtain.UpdateLoadingBar;
         }
 
         public void Exit() {

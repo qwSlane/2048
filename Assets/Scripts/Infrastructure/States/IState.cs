@@ -12,7 +12,7 @@
     
     public interface IPayloadState<TPayload>: IExitableState {
 
-        void Enter(TPayload payLoad);
+        void Enter(TPayload payload);
     }
 
 }

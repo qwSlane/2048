@@ -1,6 +1,7 @@
 ﻿using Infrastructure.States;
 using Services;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Infrastructure {
 

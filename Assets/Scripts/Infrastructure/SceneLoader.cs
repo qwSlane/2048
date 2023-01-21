@@ -8,6 +8,7 @@ namespace Infrastructure {
     public class SceneLoader {
 
         private readonly ICoroutineRunner _coroutineRunner;
+        public Action<float> SendProgress;
 
         public SceneLoader(ICoroutineRunner coroutineRunner) {
             _coroutineRunner = coroutineRunner;
@@ -25,6 +26,7 @@ namespace Infrastructure {
 
             AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
             while (!waitNextScene.isDone) {
+                SendProgress?.Invoke(waitNextScene.progress);
                 yield return null;
             }
             onLoaded?.Invoke();

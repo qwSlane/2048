@@ -6,6 +6,7 @@
 
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
+        private readonly Curtain _curtain;
 
         public BootstrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader) {
             _gameStateMachine = gameStateMachine;
