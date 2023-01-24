@@ -1,6 +1,8 @@
 ﻿using Entities;
+using Infrastructure.Kernel.Field;
 using Services;
 using Services.Assets;
+using UI;
 using UnityEngine;
 using Zenject;
 using Random = System.Random;
@@ -10,13 +12,27 @@ namespace Infrastructure.DI_Installers {
     public class LocationInstaller : MonoInstaller {
 
         [SerializeField] private GameObject inputService;
+        [SerializeField] private GameObject HUD;
 
         // ReSharper disable Unity.PerformanceAnalysis
         public override void InstallBindings() {
             BindInput();
+            BindGameData();
+            BindHUD();
             BindAssetProvider();
             BindRandomService();
             BindFactory();
+        }
+
+        private void BindHUD() {
+            ScoreCounter counter = 
+                Container.InstantiatePrefabForComponent<ScoreCounter>(HUD);
+        }
+
+        private void BindGameData() {
+            Container
+                .Bind<GameData>()
+                .AsSingle();
         }
 
         private void BindRandomService() {

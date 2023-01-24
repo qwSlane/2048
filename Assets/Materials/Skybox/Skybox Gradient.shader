@@ -46,7 +46,7 @@ Shader "Skybox Gradient" {
             #pragma shader_feature_local _SCREENSPACE_ON
 
 
-            struct appdata
+            struct MeshData
             {
                 float4 vertex : POSITION;
                 float4 color : COLOR;
@@ -70,7 +70,7 @@ Shader "Skybox Gradient" {
             uniform float _mult;
             uniform float _pwer;
 
-            v2f vert(appdata v)
+            v2f vert(MeshData v)
             {
                 v2f o;
                 UNITY_SETUP_INSTANCE_ID(v);

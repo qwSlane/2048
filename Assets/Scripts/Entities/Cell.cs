@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Infrastructure.Kernel.Field;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Entities {
 
@@ -8,7 +10,7 @@ namespace Entities {
 
         private Tile _currentTile;
         private readonly Dictionary<Direction, Cell> _neighbours = new Dictionary<Direction, Cell>();
-        [SerializeField] private List<Tile> _mergedTiles = new List<Tile>();
+        [SerializeField] private List<Tile> mergedTiles = new List<Tile>();
         private bool _isMerged;
         public int GetValue => (_currentTile) ? _currentTile.Value : 0;
 
@@ -37,16 +39,22 @@ namespace Entities {
             return false;
         }
 
-        public void Apply() {
+        public int Apply() {
+
+            int score = 0;
+            
             if (_isMerged) {
-                foreach (Tile tile in _mergedTiles) {
+                foreach (Tile tile in mergedTiles) {
                     tile.Merge();
+                    score += tile.Value;
                 }
                 _isMerged = false;
                 _currentTile.Appear();
-                _mergedTiles.Clear();
+                mergedTiles.Clear();
             }
             _currentTile?.Move();
+
+            return score;
         }
 
         private bool TryAdd(Tile merged, Direction direction) {
@@ -59,7 +67,7 @@ namespace Entities {
         }
 
         private bool Merging(Tile merged) {
-            if (_currentTile?.Value == merged.Value &&!_isMerged) {
+            if (_currentTile?.Value == merged.Value && !_isMerged) {
                 PrepareTiles(merged);
                 _currentTile = GetNewTile?.Invoke(transform, _currentTile.Value * 2);
                 _isMerged = true;
@@ -80,8 +88,8 @@ namespace Entities {
 
         private void PrepareTiles(Tile merged) {
             merged.transform.SetParent(transform);
-            _mergedTiles.Add(merged);
-            _mergedTiles.Add(_currentTile);
+            mergedTiles.Add(merged);
+            mergedTiles.Add(_currentTile);
         }
 
 
