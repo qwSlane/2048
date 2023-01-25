@@ -1,7 +1,6 @@
 using Infrastructure.Kernel.Field;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace UI {

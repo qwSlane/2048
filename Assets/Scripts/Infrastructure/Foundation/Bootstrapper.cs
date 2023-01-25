@@ -1,16 +1,15 @@
-﻿using Infrastructure.States;
+using Infrastructure.Kernel;
+using Infrastructure.States;
 using UnityEngine;
+using Zenject;
 
 namespace Infrastructure.Foundation {
 
-    public class Bootstrapper : MonoBehaviour, ICoroutineRunner {
-        
-        private Game _game;
+    public class Bootstrapper : MonoBehaviour {
 
-        private void Awake() {
-            _game = new Game(this);
-            _game.StateMachine.Enter<BootstrapState>();
-            DontDestroyOnLoad(this);
+        [Inject]
+        public void Initialize(GameStateMachine stateMachine) {
+            stateMachine.Enter<BootstrapState>();
         }
 
     }

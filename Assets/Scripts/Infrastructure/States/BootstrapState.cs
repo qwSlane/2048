@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.States {
+﻿using Infrastructure.Kernel;
+
+namespace Infrastructure.States {
 
     public class BootstrapState : IState {
 

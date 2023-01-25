@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Infrastructure.States;
-using Services;
 
-namespace Infrastructure {
+namespace Infrastructure.Kernel {
 
     public class GameStateMachine {
 
