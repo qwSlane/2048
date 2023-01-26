@@ -1,3 +1,4 @@
+using System;
 using Infrastructure.Kernel;
 using Infrastructure.States;
 using UnityEngine;
@@ -7,9 +8,12 @@ namespace Infrastructure.Foundation {
 
     public class Bootstrapper : MonoBehaviour {
 
+        private GameStateMachine _stateMachine;
+
         [Inject]
         public void Initialize(GameStateMachine stateMachine) {
-            stateMachine.Enter<BootstrapState>();
+            _stateMachine = stateMachine;
+            _stateMachine.Enter<BootstrapState>();
         }
 
     }

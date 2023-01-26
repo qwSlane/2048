@@ -20,8 +20,16 @@ namespace Infrastructure.DI_Installers {
             BindGameData();
             BindHUD();
             BindAssetProvider();
-            BindRandomService();
             BindFactory();
+            BindCellMover();
+            BindTileSpawner();
+        }
+
+        private void BindCellMover() {
+            Container
+                .Bind<CellMover>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindHUD() {
@@ -35,9 +43,9 @@ namespace Infrastructure.DI_Installers {
                 .AsSingle();
         }
 
-        private void BindRandomService() {
+        private void BindTileSpawner() {
             Container
-                .Bind<Random>()
+                .Bind<TileSpawner>()
                 .AsSingle();
         }
 

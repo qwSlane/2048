@@ -76,8 +76,8 @@ namespace Entities {
             return false;
         }
 
-        private void AddTile(Tile merged) {
-            _currentTile = merged;
+        private void AddTile(Tile tile) {
+            _currentTile = tile;
             _currentTile.transform.SetParent(transform);
         }
 

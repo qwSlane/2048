@@ -1,9 +1,9 @@
 ﻿using Infrastructure.Kernel;
 using Zenject;
 
-namespace Infrastructure.Foundation {
+namespace Infrastructure.DI_Installers {
 
-    public class SceneKernel : MonoInstaller, ICoroutineRunner {
+    public class GlobalInstaller : MonoInstaller, ICoroutineRunner {
 
         // ReSharper disable Unity.PerformanceAnalysis
         public override void InstallBindings() {
