@@ -16,11 +16,11 @@ namespace Infrastructure.States {
         }
 
         public void Enter() {
-            _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+            _sceneLoader.Load(Initial, onLoaded: MenuEnter);
         }
 
-        private void EnterLoadLevel() {
-            _gameStateMachine.Enter<LoadLevelState, string>("Game");
+        private void MenuEnter() {
+            _gameStateMachine.Enter<LoadLevelState, string>("MainMenu");
         }
 
         public void Exit() {

@@ -1,11 +1,11 @@
 ﻿using Entities;
+using Infrastructure.Kernel;
 using Infrastructure.Kernel.Field;
 using Services;
 using Services.Assets;
 using UI;
 using UnityEngine;
 using Zenject;
-using Random = System.Random;
 
 namespace Infrastructure.DI_Installers {
 
@@ -22,8 +22,8 @@ namespace Infrastructure.DI_Installers {
             BindAssetProvider();
             BindFactory();
             BindCellMover();
-            BindTileSpawner();
         }
+        
 
         private void BindCellMover() {
             Container
@@ -40,12 +40,6 @@ namespace Infrastructure.DI_Installers {
         private void BindGameData() {
             Container
                 .Bind<GameData>()
-                .AsSingle();
-        }
-
-        private void BindTileSpawner() {
-            Container
-                .Bind<TileSpawner>()
                 .AsSingle();
         }
 

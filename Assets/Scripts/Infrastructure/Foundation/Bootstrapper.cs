@@ -1,4 +1,3 @@
-using System;
 using Infrastructure.Kernel;
 using Infrastructure.States;
 using UnityEngine;

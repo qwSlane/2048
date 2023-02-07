@@ -10,9 +10,11 @@ namespace Entities {
 
         private Tile _currentTile;
         private readonly Dictionary<Direction, Cell> _neighbours = new Dictionary<Direction, Cell>();
-        [SerializeField] private List<Tile> mergedTiles = new List<Tile>();
+        private List<Tile> _mergedTiles = new List<Tile>();
         private bool _isMerged;
         public int GetValue => (_currentTile) ? _currentTile.Value : 0;
+
+        public int GetMerge => (_isMerged) ? 1 : 0;
 
         public event Func<Transform, int, Tile> GetNewTile;
 
@@ -32,6 +34,11 @@ namespace Entities {
             }
         }
 
+        public void Apply() {
+            _currentTile?.Move();
+            _isMerged = false;
+        }
+
         public bool TryMerge(Tile merged, Direction direction) {
             if (merged) {
                 return Merging(merged) || TryAdd(merged, direction);
@@ -39,21 +46,17 @@ namespace Entities {
             return false;
         }
 
-        public int Apply() {
-
+        public int GetScore() {
             int score = 0;
-            
+
             if (_isMerged) {
-                foreach (Tile tile in mergedTiles) {
+                foreach (Tile tile in _mergedTiles) {
                     tile.Merge();
                     score += tile.Value;
                 }
-                _isMerged = false;
                 _currentTile.Appear();
-                mergedTiles.Clear();
+                _mergedTiles.Clear();
             }
-            _currentTile?.Move();
-
             return score;
         }
 
@@ -69,7 +72,7 @@ namespace Entities {
         private bool Merging(Tile merged) {
             if (_currentTile?.Value == merged.Value && !_isMerged) {
                 PrepareTiles(merged);
-                _currentTile = GetNewTile?.Invoke(transform, _currentTile.Value * 2);
+                _currentTile = GetNewTile.Invoke(transform, _currentTile.Value * 2);
                 _isMerged = true;
                 return true;
             }
@@ -88,8 +91,8 @@ namespace Entities {
 
         private void PrepareTiles(Tile merged) {
             merged.transform.SetParent(transform);
-            mergedTiles.Add(merged);
-            mergedTiles.Add(_currentTile);
+            _mergedTiles.Add(merged);
+            _mergedTiles.Add(_currentTile);
         }
 
 

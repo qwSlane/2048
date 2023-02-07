@@ -15,7 +15,7 @@ namespace Entities {
             Cell[,] cells = new Cell[4, 4];
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
-                    Vector3 position = new Vector3(i * 4, (i + j) * .3f, j * 4);
+                    Vector3 position = new Vector3(i * 2, (i + j) * .2f, j * 2);
                     Cell cell = _assetProvider.GetAsset(AssetPath.CellPath, position, parent) 
                         .GetComponent<Cell>();
                     cell.GetNewTile += InstantiateTile;
